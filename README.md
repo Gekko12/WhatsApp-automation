@@ -1,4 +1,4 @@
-# <font color="hotpink"> Automation using selenium </font>
+# Automation using selenium (Python)
 
 * To install Selenium
 ```
