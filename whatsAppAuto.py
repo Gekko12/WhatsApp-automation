@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 import time
 
 
@@ -15,14 +16,21 @@ pdf_filepath = '/home/gaurav/Programs/Projects/WhatsApp_Automation/basicscience.
 
 small_delay = 3  #in-seconds, for buttons
 long_delay = 6   #in-seconds, for processing time like img/doc processing while including path
-qr_code_delay = 60   #in-seconds, in between time to scan the qr-code and start the automation
+qr_code_delay = 30   #in-seconds, in between time to scan the qr-code and start the automation
 
 try:
     ser = Service(chrome_path)
-    driver = webdriver.Chrome(service = ser)
+    
+    #To disable repeated QR-code scanning
+    options = Options()
+    options.add_argument("--user-data-dir=chrome-data")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    
+    driver = webdriver.Chrome(service = ser, options=options)
     driver.maximize_window()
     driver.get("https://web.whatsapp.com")
-
+    
     print('Supported web.whatsapp version:', 'Version 2.2149.4')
     print("Scanning QR code ......")
     time.sleep(qr_code_delay)
@@ -73,7 +81,7 @@ try:
     send_butt.click()
     time.sleep(small_delay)
     print('pdf sent')
-
+    
     driver.close()
     driver.quit()
 except Exception as e:
