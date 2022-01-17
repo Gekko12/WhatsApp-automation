@@ -10,3 +10,7 @@ pip show selenium
 * Contact should be saved one.
 * WhatsApp version tested: Version 2.2149.4
 * Global variables can be changed, correct absolute-path should be specified.
+* User data path for Window users:
+```
+usr_data_path = "user-data-dir=C:/Users/userName/AppData/Local/Google/Chrome/User Data/WhatsAppSelenium"
+```
